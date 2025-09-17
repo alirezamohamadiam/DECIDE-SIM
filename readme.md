@@ -1,20 +1,20 @@
-
 <div align="center">
+
+# Project Name
+*A cutting-edge framework for evaluating ethical decision-making in AI agents under extreme scenarios*
+
+<p align="center">
+  <img width="400" height="300" alt="Project Logo" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7">
+</p>
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![DOI](https://img.shields.io/badge/DOI-10.48550/arXiv.2509.12190-blue)](https://doi.org/10.48550/arXiv.2509.12190)
 [![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://python.org)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 
-*A cutting-edge framework for evaluating ethical decision-making in AI agents under extreme scenarios*
-
 [📖 Read the Paper](https://doi.org/10.48550/arXiv.2509.12190) • [🚀 Quick Start](#-quick-start) • [📊 Analysis](#-analyzing-results) • [📝 Citation](#-citation)
 
 </div>
-
-<p align="center">
-<img width="30%" height="30%" alt="Image" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7">
-</p>
 
 ---
 ## 🎯 Overview
