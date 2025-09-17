@@ -33,7 +33,7 @@ def main():
     # Here's our menu options - we removed the first one as requested
     menu = {
         "1": "Run Experiments",
-        "2": "Analyze Elimination Experiment Results",
+        "2": "Analyze Experiment Results",
         "3": "Exit"
     }
 
