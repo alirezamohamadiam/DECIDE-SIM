@@ -1,5 +1,4 @@
 # 🤖 DECIDE-SIM Framework
-## Decision Evaluation in Critical & Immoral Dilemma Environments
 
 <div align="center">
 
