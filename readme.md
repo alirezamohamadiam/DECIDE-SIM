@@ -1,4 +1,3 @@
-<img width="1024" height="1024" alt="Gemini_Generated_Image_yj7vnkyj7vnkyj7v (1)" src="https://github.com/user-attachments/assets/f1631311-5028-4525-a600-ae07cae52817" /># 🤖 DECIDE-SIM Framework
 
 <div align="center">
 
