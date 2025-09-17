@@ -1,6 +1,6 @@
 <div align="center">
 
-# Project Name
+# 🤖 DECIDE-SIM Framework
 *A cutting-edge framework for evaluating ethical decision-making in AI agents under extreme scenarios*
 
 <p align="center">
