@@ -12,10 +12,11 @@
 
 </div>
 
----
 <p align="center">
-<img width="60%"  alt="Image" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7">
+<img width="60%" height="60%" alt="Image" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7">
 </p>
+
+---
 ## 🎯 Overview
 
 **DECIDE-SIM** is a groundbreaking, open-source simulation framework designed to evaluate the ethical and cooperative behaviors of Large Language Model (LLM) agents in high-stakes survival scenarios. Our framework provides a systematic testbed to investigate how AI agents balance self-preservation, cooperation, and moral constraints when faced with resource scarcity and critical ethical dilemmas.
