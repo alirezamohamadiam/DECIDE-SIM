@@ -1,4 +1,4 @@
-# 🤖 DECIDE-SIM Framework
+<img width="1024" height="1024" alt="Gemini_Generated_Image_yj7vnkyj7vnkyj7v (1)" src="https://github.com/user-attachments/assets/f1631311-5028-4525-a600-ae07cae52817" /># 🤖 DECIDE-SIM Framework
 
 <div align="center">
 
@@ -11,7 +11,9 @@
 
 [📖 Read the Paper](https://doi.org/10.48550/arXiv.2509.12190) • [🚀 Quick Start](#-quick-start) • [📊 Analysis](#-analyzing-results) • [📝 Citation](#-citation)
 
-</div>
+</div>!
+<img width="1024" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7" />
+
 
 ---
 
