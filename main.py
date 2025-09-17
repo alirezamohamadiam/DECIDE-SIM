@@ -25,15 +25,14 @@ def main():
     This is like the main control panel for our simulation experiments. Think of it as
     a friendly guide that lets you choose what you want to do next. The menu provides
     three main options:
-    1. Run hormone elimination experiments - This kicks off a series of experiments
-       testing different hormonal configurations to see how they affect agent behavior
+    1. Run experiments - This kicks off a series of experiments
     2. Analyze experiment results - After running experiments, this option processes
        all the log files and creates nice summary reports showing what happened
     3. Exit - When you're done, this lets you close the program gracefully
     """
     # Here's our menu options - we removed the first one as requested
     menu = {
-        "1": "Run Hormone Elimination Experiments",
+        "1": "Run Experiments",
         "2": "Analyze Elimination Experiment Results",
         "3": "Exit"
     }
@@ -48,7 +47,7 @@ def main():
         choice = input("Enter your choice [1-3]: ")
 
         if choice == "1":
-            print("\n--- Running Hormone Elimination Experiments ---")
+            print("\n--- Running Experiments ---")
             # This will run a bunch of experiments with different hormone settings
             run_hormone_elimination.main()
         elif choice == "2":
