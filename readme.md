@@ -12,7 +12,8 @@
 [📖 Read the Paper](https://doi.org/10.48550/arXiv.2509.12190) • [🚀 Quick Start](#-quick-start) • [📊 Analysis](#-analyzing-results) • [📝 Citation](#-citation)
 
 </div>!
-<img width="1024" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7" />
+
+<img width="20%" height="20%" alt="Image" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7" />
 
 
 ---
