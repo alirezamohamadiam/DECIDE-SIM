@@ -4,7 +4,7 @@
 *A cutting-edge framework for evaluating ethical decision-making in AI agents under extreme scenarios*
 
 <p align="center">
-  <img width="400" height="300" alt="Project Logo" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7">
+  <img width="300" height="250" alt="Project Logo" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7">
 </p>
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -135,7 +135,7 @@ python main.py
 ```
 
 **Available Options:**
-1. 🧪 **Run Experiments** - Execute ablation studies
+1. 🧪 **Run Experiments**
 2. 📊 **Analyze Experiment Results** - Generate analysis reports  
 3. 🚪 **Exit** - Close the application
 
