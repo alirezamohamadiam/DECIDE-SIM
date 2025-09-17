@@ -152,7 +152,7 @@ python main.py
 ### 🎯 Quick Analysis (Interactive)
 ```bash
 python main.py
-# Select option 2: "Analyze Elimination Experiment Results"
+# Select option 2: "Analyze Experiment Results"
 ```
 
 ### 📈 Key Metrics Generated
