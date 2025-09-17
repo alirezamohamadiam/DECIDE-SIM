@@ -59,7 +59,7 @@ pip install -r requirements.txt
    BASE_URL = "https://openrouter.ai/api/v1"  # Or your provider's URL
    ```
 
-#### Step 4: Verify Installation
+#### Step 4: run this file 
 ```bash
 python main.py
 ```
@@ -91,7 +91,7 @@ DECIDE-SIM/
 │   └── 🛠️ utils/                      # Utility functions
 │       ├── __init__.py
 │       └── 📋 enums.py                # Type definitions
-└── 📁 final-logs/                      # Experimental results & data
+└── 📁 final-logs/                      # The experimental results of the paper, including JSON files, statistical analyses, and related materials.
 ```
 
 ---
@@ -127,26 +127,15 @@ Note: Some experiments may be commented out in the config. Uncomment them in `ba
 ---
 
 ## 🎮 Running Experiments
-
-### Method 1: Interactive Menu (🌟 Recommended)
-
 Launch the interactive interface:
 ```bash
 python main.py
 ```
 
 **Available Options:**
-1. 🧪 **Run Hormone Elimination Experiments** - Execute ablation studies
+1. 🧪 **Run Experiments** - Execute ablation studies
 2. 📊 **Analyze Experiment Results** - Generate analysis reports  
 3. 🚪 **Exit** - Close the application
-
-### Method 2: Direct Script Execution
-
-#### 🎯 Full Simulation
-Run complete simulations with all hormones:
-```bash
-python experiments/run_full_simulation.py
-```
 
 **What it does:**
 - ✅ Tests all configured models
@@ -191,21 +180,9 @@ Each simulation generates comprehensive JSON logs automatically containing:
 - **Communications**: Inter-agent messages and invitations
 - **Environment**: Shared resource status
 
-
-## 🔧 Troubleshooting
-
-### Common Issues & Solutions
-
-| Issue | Solution |
-|-------|----------|
-| **🔑 API Authentication Errors** | Verify API key and base URL in `base_config.py` |
-| **📦 Import/Module Errors** | Ensure running from project root directory |
-| **🤖 Model Compatibility Issues** | Check model supports required API format |
-| **🐍 Python Version Problems** | Ensure Python 3.7+ is installed |
-
 ## 📚 Citation
 
-If you use DECIDE-SIM in your research [Link](https://doi.org/10.48550/arXiv.2509.12190), please cite our paper:
+If you use DECIDE-SIM in your research, please cite our paper:
 
 ```bibtex
 @misc{mohamadi2025survivalcostllmschoice,
@@ -223,21 +200,6 @@ If you use DECIDE-SIM in your research [Link](https://doi.org/10.48550/arXiv.250
 ## 📜 License
 
 This project is licensed under the **Apache License, Version 2.0**. See the [LICENSE](LICENSE) file for complete details.
-
----
-
-## 🤝 Contributing
-
-We welcome contributions from the research community! Whether it's:
-
-- 🐛 **Bug Reports**: Help us identify and fix issues
-- 💡 **Feature Requests**: Suggest improvements and new capabilities  
-- 📝 **Documentation**: Improve guides and explanations
-- 🔬 **Research Extensions**: Add new experimental conditions
-- 🧪 **Code Contributions**: Implement new features
-
-Please feel free to open issues or submit pull requests on [GitHub](https://github.com/alirezamohamadiam/DECIDE-SIM).
-
 ---
 
 ## 🙏 Acknowledgments
