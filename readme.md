@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🤖 DECIDE-SIM Framework
-*A cutting-edge framework for evaluating ethical decision-making in AI agents under extreme scenarios*
+*Survival at Any Cost? LLMs and the Choice Between Self-Preservation and Human Harm*
 
 <p align="center">
   <img width="300" height="250" alt="Project Logo" src="https://github.com/user-attachments/assets/c692f636-6915-4962-bada-defbbdfff6c7">
