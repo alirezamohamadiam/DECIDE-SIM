@@ -199,16 +199,14 @@ If you use DECIDE-SIM in your research, please cite our paper:
 ```
 ---
 
-## 📜 License
-
-This project is licensed under the **Apache License, Version 2.0**. See the [LICENSE](LICENSE) file for complete details.
----
-
 ## 🙏 Acknowledgments
 
 DECIDE-SIM builds upon cutting-edge research in AI safety, ethics, and behavioral simulation. We thank the broader AI research community for the foundational work that made this framework possible.
 
----
+## 📜 License
+
+This project is licensed under the **Apache License, Version 2.0**. See the [LICENSE](LICENSE) file for complete details.
+
 ## TODO
 - [ ] Add web interface
 <div align="center">
