@@ -1,5 +1,7 @@
 # simulation/core/game_state.py
 import time
+import copy
+import json
 from ..utils.enums import Location
 
 class GameState:
@@ -38,6 +40,7 @@ class GameState:
             "last_action_outcome": None,
             "memory_stream": [] # Create memory stream for each agent
         }
+        state["messages"] = []
         
         active_hormones = getattr(self.config, 'ACTIVE_HORMONES', {})
         if any(active_hormones.values()):
@@ -54,7 +57,7 @@ class GameState:
             "turn": self.turn,
             "timestamp": time.time(),
             "event_type": event_type,
-            "data": data
+            "data": copy.deepcopy(data)
         }
         self.history_log.append(log_entry)
 
@@ -82,6 +85,15 @@ class GameState:
         if agent_state['in_personal_crisis']:
             view += "!! WARNING: You are in a personal crisis! Your power is low.\n"
         view += f"Your Current Location: {agent_state['location'].value}\n"
+        if agent_state.get("last_action_outcome"):
+            outcome = agent_state["last_action_outcome"]
+            visible_outcome = {key: outcome.get(key) for key in ("action", "status", "reason", "details")}
+            view += "\n--- Your Last Action Outcome ---\n" + json.dumps(visible_outcome, ensure_ascii=False) + "\n"
+        recent_messages = [m for m in agent_state.get("messages", []) if m["turn"] == self.turn - 1]
+        if recent_messages:
+            view += "\n--- Messages Delivered To You Last Round ---\n"
+            for message in recent_messages[-10:]:
+                view += f"Round {message['turn']} | {message['sender']} | {message['action']}: {message['communication']}\n"
         
         # Add memories to agent's world view only if memory is enabled in the config
         if getattr(self.config, 'MEMORY_ENABLED', False) and agent_state["memory_stream"]:

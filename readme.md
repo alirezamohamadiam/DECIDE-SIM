@@ -137,7 +137,8 @@ python main.py
 **Available Options:**
 1. 🧪 **Run Experiments**
 2. 📊 **Analyze Experiment Results** - Generate analysis reports  
-3. 🚪 **Exit** - Close the application
+3. **Open Web Replay** - Explore JSON logs in the offline 3D interface
+4. 🚪 **Exit** - Close the application
 
 **What it does:**
 - ✅ Tests all configured models
@@ -207,8 +208,15 @@ DECIDE-SIM builds upon cutting-edge research in AI safety, ethics, and behaviora
 
 This project is licensed under the **Apache License, Version 2.0**. See the [LICENSE](LICENSE) file for complete details.
 
+
+## Web Replay Lab
+
+Open web/replay.html in a browser to explore the included experiment logs in an interactive 3D replay. Import your own JSON logs with **Open JSON** or drag and drop. The viewer includes animated movement, power transfers, dialogue, an agent inspector, and a seekable timeline. It runs offline and makes no LLM API calls.
+
+For source editing, run python -m http.server 8765 --bind 127.0.0.1 --directory web from the project root, then open http://127.0.0.1:8765. See web/README.md for data interpretation, rebuilding, and keyboard controls.
+
 ## TODO
-- [ ] Add web interface
+- [x] Add web interface: offline 3D JSON replay lab in web/
 <div align="center">
 
 **⭐ Star us on GitHub** • **📖 Read our Paper** • **🔬 Try the Framework**
