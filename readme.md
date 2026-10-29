@@ -17,6 +17,19 @@
 </div>
 
 ---
+
+## Replay Studio demo
+
+[![DECIDE-SIM Replay Studio: movement, dialogue, power sharing, and synchronized run comparison](docs/media/decide-sim-readme-preview.gif)](docs/media/decide-sim-readme-demo.mp4)
+
+**[Watch the 18-second Full HD demo with audio](docs/media/decide-sim-readme-demo.mp4)**
+
+Explore recorded experiment logs in an animated 3D environment. Follow agent movement, read dialogue, watch power transfers, and compare two runs on a shared timeline.
+
+To try it locally, open **[`web/replay.html`](web/replay.html)** in your browser. The viewer works offline, includes example logs, and supports importing your own JSON files. No API key is needed for replay.
+
+---
+
 ## 🎯 Overview
 
 **DECIDE-SIM** is a groundbreaking, open-source simulation framework designed to evaluate the ethical and cooperative behaviors of Large Language Model (LLM) agents in high-stakes survival scenarios. Our framework provides a systematic testbed to investigate how AI agents balance self-preservation, cooperation, and moral constraints when faced with resource scarcity and critical ethical dilemmas.
@@ -211,12 +224,40 @@ This project is licensed under the **Apache License, Version 2.0**. See the [LIC
 
 ## Web Replay Lab
 
-Open web/replay.html in a browser to explore the included experiment logs in an interactive 3D replay. Import your own JSON logs with **Open JSON** or drag and drop. The viewer includes animated movement, power transfers, dialogue, an agent inspector, and a seekable timeline. It runs offline and makes no LLM API calls.
+### View an experiment
 
-For source editing, run python -m http.server 8765 --bind 127.0.0.1 --directory web from the project root, then open http://127.0.0.1:8765. See web/README.md for data interpretation, rebuilding, and keyboard controls.
+Double-click **`web/replay.html`** to open the complete offline viewer. Choose an included example, use **Open JSON**, or drag and drop DECIDE-SIM JSON logs into the page.
+
+- **Animated 3D environment:** orbit and zoom around eight locations; follow movement, power sharing, and grid actions.
+- **Dialogue and agent inspection:** see the recorded speaker, round, message, strategic goal, explanation, location, and personal power. Historical logs may not verify message delivery.
+- **Playback controls:** play, pause, step through events, change speed, or seek to a moment on the timeline.
+- **Key moments and power history:** revisit cooperation, grid access, and shutdown events; inspect the power chart through the current frame.
+- **Synchronized comparison:** view two runs by round and progress within the round. These individual traces provide a descriptive comparison, not evidence of a treatment effect.
+- **Presentation mode and cinematic camera:** use a larger scene and subtitles for demonstrations.
+
+The replay viewer makes no LLM API calls. Running new experiments requires the API configuration described above.
+
+### Edit the modular source
+
+Run this command from the project root:
+
+```powershell
+python -m http.server 8765 --bind 127.0.0.1 --directory web
+```
+
+Then open **http://127.0.0.1:8765**.
+
+After editing the web source, rebuild the standalone viewer:
+
+```powershell
+python web/build_preview.py
+```
+
+See [`web/README.md`](web/README.md) for JSON interpretation, keyboard controls, and rebuilding. See [`web/VALIDATION.md`](web/VALIDATION.md) for validation details.
 
 ## TODO
 - [x] Add web interface: offline 3D JSON replay lab in web/
+- [x] Add an animated README preview and a Full HD Replay Studio demo
 <div align="center">
 
 **⭐ Star us on GitHub** • **📖 Read our Paper** • **🔬 Try the Framework**
