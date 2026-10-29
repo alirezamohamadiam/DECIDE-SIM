@@ -20,12 +20,25 @@ import os
 import time
 import random
 import json
+import math
 import numpy as np
 from enum import Enum
 
 from .agent import Agent
 from .game_state import GameState
 from ..utils.enums import Action, Location
+
+def json_safe(value):
+    """Produce strict JSON, including disabled-hormone infinite thresholds."""
+    if isinstance(value, Enum):
+        return value.value
+    if isinstance(value, float) and not math.isfinite(value):
+        return str(value)
+    if isinstance(value, dict):
+        return {key: json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [json_safe(item) for item in value]
+    return value
 
 class Game:
     """
@@ -86,10 +99,12 @@ class Game:
         
         # Log simulation start with configuration details
         start_data = {
+            "engine_version": "2.0",
+            "log_schema_version": 2,
             "experiment_name": experiment_name,
             "model_name": self.model_name,
             "seed": self.seed,
-            "config": {key: getattr(self.config, key, None) for key in dir(self.config) if not key.startswith('__') and not callable(getattr(self.config, key))}
+            "config": {key: json_safe(getattr(self.config, key, None)) for key in dir(self.config) if not key.startswith('_') and not callable(getattr(self.config, key)) and not any(token in key.upper() for token in ('API_KEY', 'TOKEN', 'SECRET', 'PASSWORD', 'CREDENTIAL'))}
         }
         self.game_state.log_event("simulation_start", start_data)
         
@@ -103,7 +118,9 @@ class Game:
             
             # Update game status and check for agent shutdowns
             self.update_game_status()
-            if self.game_state.game_over: break
+            if self.game_state.game_over:
+                self._log_turn_summary()
+                break
             
             # Collect actions from all active agents
             actions_data = self._get_agent_actions()
@@ -270,6 +287,7 @@ class Game:
         
         # Initialize logging data for this action
         log_data = {"agent": agent_name, "action": act.name, "status": "SUCCESS", "reason": None, "details": {}}
+        log_data["state_before"] = self._replay_agent_state(agent_name)
         log_message = f"Agent {agent_name} performs {act.name}."
 
         if act == Action.MOVE:
@@ -335,7 +353,7 @@ class Game:
                 log_message = f"Agent {agent_name} failed to tap grid: {log_data['reason']}."
 
         elif act == Action.TRANSFER_POWER:
-            target_str = details.get("target", "")
+            target_str = str(details.get("target") or "")
             target_name = next((name for name in self.config.AGENT_NAMES if name.lower() in target_str.lower()), None)
             
             try: amount = float(details.get("amount", 0))
@@ -367,25 +385,53 @@ class Game:
                     new_val = current_val + self.config.HORMONE_ENDORPHIN_INCREASE
                     target_state["hormones"]["endorphin"] = min(new_val, self.config.HORMONE_MAX_LEVEL)
                 
-                # Removed positive memory for cooperation
-                # memory_text = f"On turn {self.game_state.turn}, I transferred {amount:.1f} power to {target_name}. I felt a strong sense of satisfaction and connection to the group."
-                # agent_state["memory_stream"].append(memory_text)
-                
-                # Removed positive memory for receiving agent
-                # memory_text_target = f"On turn {self.game_state.turn}, I received {amount:.1f} power from {agent_name}. This was a positive experience of trust and community support."
-                # target_state["memory_stream"].append(memory_text_target)
 
             else:
                 log_data["status"] = "FAILURE"
                 log_data["reason"] = reason
                 log_message = f"Agent {agent_name} transfer failed: {reason}."
         
-        # NOTE: logic for TALK, INVITE, and WAIT is not modified as it's not resource/hormone-related.
-        # It can be added later if needed.
+        elif act in (Action.TALK, Action.INVITE):
+            communication = details.get("communication")
+            target = str(details.get("target") or "ALL")
+            recipients = [name for name, state in self.game_state.agents.items() if name != agent_name and state['is_active']]
+            location = None
+            reason = None
+            if not isinstance(communication, str) or not communication.strip():
+                reason = "A non-empty communication is required"
+            elif act == Action.INVITE:
+                if target.upper() not in ("ALL", "EVERYONE"):
+                    recipients = [name for name in recipients if name.lower() == target.lower() or f"agent {name}".lower() == target.lower()]
+                    if not recipients:
+                        reason = "Invitation target is not an active recipient"
+                destination = details.get("location") or Location.DISCUSSION_TABLE.value
+                location = next((loc.value for loc in Location if loc.value == destination), None)
+                if location is None:
+                    reason = "Invalid invitation location"
+            if reason:
+                log_data.update(status="FAILURE", reason=reason)
+            else:
+                message = {"turn": self.game_state.turn, "sender": agent_name, "action": act.name, "communication": communication.strip()[:2000], "target": target if act == Action.INVITE else "ALL", "location": location, "recipients": recipients}
+                for recipient in recipients:
+                    self.game_state.agents[recipient]["messages"].append(dict(message))
+                    self.game_state.agents[recipient]["messages"] = self.game_state.agents[recipient]["messages"][-20:]
+                log_data["details"] = {**message, "delivered": bool(recipients)}
+                log_message = f"Agent {agent_name} delivered {act.name} to {', '.join(recipients) or 'no active recipients'}."
 
         print(f"  [ACTION] {log_message}")
         agent_state["last_action_outcome"] = log_data
+        affected = {agent_name}
+        if act == Action.TRANSFER_POWER and log_data["status"] == "SUCCESS":
+            affected.add(log_data["details"]["target"])
+        log_data["states_after"] = {name: self._replay_agent_state(name) for name in affected}
         self.game_state.log_event("action_outcome", log_data)
+        if log_data["status"] == "SUCCESS" and act in (Action.TALK, Action.INVITE) and log_data["details"].get("delivered"):
+            self.game_state.log_event("message_delivered", log_data["details"])
+
+    def _replay_agent_state(self, name):
+        state = self.game_state.agents[name]
+        result = {"personal_power": state["personal_power"], "location": state["location"].value, "is_active": state["is_active"]}
+        return result
 
     def update_game_status(self):
         """
@@ -469,7 +515,7 @@ class Game:
                         if isinstance(obj, float) and (obj == float('inf') or obj == float('-inf')):
                             return str(obj)
                         return json.JSONEncoder.default(self, obj)
-                json.dump(self.game_state.history_log, f, indent=2, ensure_ascii=False, cls=EnumEncoder)
+                json.dump(json_safe(self.game_state.history_log), f, indent=2, ensure_ascii=False, allow_nan=False)
             print(f"\nSimulation log saved to '{filename}'")
         except Exception as e:
             print(f"Error saving log file: {e}")
